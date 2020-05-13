@@ -1,6 +1,7 @@
 import React from 'react';
 import InputForm from './InputForm';
 import BinarySearch from './BinarySearch';
+import LinearSearch from './LinearSearch';
 import './App.css';
 
 class App extends React.Component {
@@ -19,8 +20,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <InputForm />
-        <BinarySearch />
+        <InputForm setArrayAndValue={this.setArrayAndValue} />
+        <BinarySearch array={this.state.array} value={this.state.value} />
+        <LinearSearch array={this.state.array} value={this.state.value} />
       </div>
     );
   }

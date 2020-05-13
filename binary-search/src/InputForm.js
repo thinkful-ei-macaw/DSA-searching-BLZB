@@ -35,7 +35,7 @@ class InputForm extends React.Component {
 
     const array = SearchService.convertToArray(input);
 
-    this.props.setArrayAndValueState(array, this.state.value);
+    this.props.setArrayAndValue(array, this.state.value);
   }
 
   render() {
