@@ -33,7 +33,7 @@ class InputForm extends Component {
     e.preventDefault();
     const { input } = this.state;
 
-    const array = searchingService.convertToArray(input);
+    const array = SearchService.convertToArray(input);
 
     this.props.setArrayAndValueState(array, this.state.value);
   }
