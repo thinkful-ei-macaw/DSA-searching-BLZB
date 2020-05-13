@@ -6,45 +6,58 @@ class InputForm extends React.Component {
     super(props);
     this.state = {
       input: '',
-      value: '',
+      data: [],
+      attempts: 0,
     };
-    this.changeInput = this.changeInput.bind(this);
-    this.submitInput = this.submitInput.bind(this);
-    this.changeValue = this.changeValue.bind(this);
   }
 
-  changeInput(e) {
-    const newInput = e.target.value;
-
+  binarySearch = (data, num, start = 0, end, attempts = 0) => {
+    console.log(start, end);
+    if (start > end) {
+      this.attempts = attempts;
+      return alert('value is less than 0!');
+    }
+    let idx = Math.floor((start + end) / 2);
+    let item = data[idx];
+    if (item === num) {
+      alert(`value is ${idx} and it took ${this.attempts}`);
+    } else if (item < num) {
+      return this.binarySearch(data, num, idx + 1, end, attempts++);
+    } else if (item > num) {
+      return this.binarySearch(data, num, start, idx - 1, attempts++);
+    }
     this.setState({
-      input: newInput,
+      attempts: attempts,
     });
-  }
+    return attempts;
+  };
 
-  changeValue(e) {
-    const newInput = e.target.value;
-
-    this.setState({
-      value: newInput,
-    });
-  }
-
-  submitInput(e) {
+  submitInput = (e) => {
     e.preventDefault();
-    const { input } = this.state;
-
-    const array = SearchService.convertToArray(input);
-
-    this.props.setArrayAndValue(array, this.state.value);
-  }
+    let input = parseInt(e.target['input'].value);
+    let nums = e.target.nums.value.split(' ');
+    console.log(nums);
+    nums = nums.map((x) => parseInt(x));
+    console.log(nums);
+    let data = nums.sort((a, b) => (a > b ? 1 : -1));
+    console.log(data);
+    if (this.binarySearch(data, input, 0, data.length) < 0) {
+      alert(`number not found; searched ${this.attempts}`);
+    } else {
+      this.setState({
+        input,
+        ...data,
+      });
+    }
+  };
 
   render() {
     return (
-      <form onSubmit={(e) => this.submitInput(e)}>
-        <label htmlFor="input-feild">Add search input here</label>
-        <textarea id="input-feild" onChange={(e) => this.changeInput(e)} />
+      <form name="input" onSubmit={this.submitInput}>
+        <label htmlFor="input-field">Add search input here</label>
+        <textarea name="nums" id="input-field" />
         <label htmlFor="value">Value to search for</label>
-        <input type="text" id="value" onChange={(e) => this.changeValue(e)} />
+        <input name="input" type="text" id="value" />
         <button type="submit">Submit</button>
       </form>
     );
