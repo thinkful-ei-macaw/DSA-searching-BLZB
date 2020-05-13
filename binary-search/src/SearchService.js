@@ -14,7 +14,7 @@ const SearchService = {
     return 'Value not found';
   },
 
-  binarySearchTicks(array, value, start, end, ticks) {
+  binarySearchTicks(array = [], value, start, end, ticks) {
     ticks = ticks === undefined ? 0 : ticks;
     start = start === undefined ? 0 : start;
     end = end === undefined ? array.length : end;

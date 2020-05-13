@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchService from './SearchService';
 
-class InputForm extends Component {
+class InputForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
+import InputForm from './InputForm';
+import BinarySearch from './BinarySearch';
 import './App.css';
 
 class App extends React.Component {
